@@ -38,6 +38,9 @@ INSTALLED_APPS = [
     'cau_college',
     'user_operation',
     'site_manage',
+    # 注册 xadmin
+    'xadmin',
+    'crispy_forms',
 ]
 
 # 使用重新设计的 PersonalInformation 表替换 auth 的 User 表
@@ -111,18 +114,21 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/1.10/topics/i18n/
 
-LANGUAGE_CODE = 'en-us'
+LANGUAGE_CODE = 'zh-hans'
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = 'Asia/Shanghai'
 
 USE_I18N = True
 
 USE_L10N = True
 
-USE_TZ = True
+USE_TZ = False
 
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.10/howto/static-files/
 
 STATIC_URL = '/static/'
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR, 'static'),
+]

@@ -8,7 +8,7 @@ from django.db import models
 from cau_college.models import CourseCollege, Teacher
 
 
-# 课程信息表
+# 课程信息
 class Course(models.Model):
     course_org = models.ForeignKey(CourseCollege, verbose_name='课程机构', null=True, blank=True)
     teacher = models.ForeignKey(Teacher, verbose_name='讲师', null=True, blank=True)
@@ -20,7 +20,7 @@ class Course(models.Model):
     learn_times = models.IntegerField(default=0, verbose_name='学习时长(分钟数)')
     student_nums = models.IntegerField(default=0, verbose_name='学习人数')
     fav_nums = models.IntegerField(default=0, verbose_name='收藏人数')
-    image = models.ImageField(upload_to='course/%Y/%m', verbose_name='封面图片', max_length=100)
+    image = models.ImageField(upload_to='media/course/%Y/%m', verbose_name='封面图片', max_length=100)
     click_nums = models.IntegerField(default=0, verbose_name='点击数')
     add_time = models.DateTimeField(default=datetime.now, verbose_name='添加时间')
     tag = models.CharField(default='', verbose_name='课程标签', max_length=10)
@@ -50,15 +50,7 @@ class Course(models.Model):
         return self.name
 
 
-# # 只是为了在 admin 中注册不同的数据，不要再生成一张新表，但具有 model 的功能
-# class BannerCourse(Course):
-#     class Meta:
-#         verbose_name = '轮播课程'
-#         verbose_name_plural = verbose_name
-#         proxy = True
-
-
-# 课程章节表
+# 课程章节
 class Lesson(models.Model):
     course = models.ForeignKey(Course, verbose_name='课程')
     name = models.CharField(max_length=100, verbose_name='章节名')
@@ -76,7 +68,7 @@ class Lesson(models.Model):
         return self.name
 
 
-# 章节视频表
+# 章节视频
 class Video(models.Model):
     lesson = models.ForeignKey(Lesson, verbose_name='章节')
     name = models.CharField(max_length=100, verbose_name='视频名')
@@ -92,11 +84,11 @@ class Video(models.Model):
         return self.name
 
 
-# 课程资源表
+# 课程资源
 class CourseResource(models.Model):
     course = models.ForeignKey(Course, verbose_name='课程')
     name = models.CharField(max_length=100, verbose_name='名称')
-    download = models.FileField(upload_to='course/resource/%Y/%m', verbose_name='资源文件', max_length=100)
+    download = models.FileField(upload_to='media/course/resource/%Y/%m', verbose_name='资源文件', max_length=100)
     add_time = models.DateTimeField(default=datetime.now, verbose_name='添加时间')
 
     class Meta:
