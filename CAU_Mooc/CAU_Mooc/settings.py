@@ -22,6 +22,11 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
+# 重载 AUTHENTICATION_BACKENDS
+AUTHENTICATION_BACKENDS = (
+    'user_member.views.CustomBackend',
+)
+
 
 # Application definition
 
@@ -38,13 +43,15 @@ INSTALLED_APPS = [
     'cau_college',
     'user_operation',
     'site_manage',
-    # 注册 xadmin
+    # 注册 xadmin 后台管理工具
     'xadmin',
     'crispy_forms',
+    # 注册 captcha 随机验证码生成工具
+    'captcha',
 ]
 
 # 使用重新设计的 PersonalInformation 表替换 auth 的 User 表
-AUTH_USER_MODEL = "user_member.PersonalInformation"
+AUTH_USER_MODEL = 'user_member.PersonalInformation'
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -70,6 +77,8 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                # 把 MEDIA_URL 注册到 html 文件中 ，这样在 html 中就可以用 MEDIA_URL 变量
+                'django.template.context_processors.media',
             ],
         },
     },
@@ -132,3 +141,18 @@ STATIC_URL = '/static/'
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'static'),
 ]
+
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+
+# 邮件服务器
+EMAIL_HOST = 'smtp.sina.com'
+# 邮件服务器端口
+EMAIL_PORT = 25
+# 邮件服务器用户
+EMAIL_HOST_USER = 'mydjangotest@sina.com'
+# 邮件服务器密码
+EMAIL_HOST_PASSWORD = 'django666666'
+EMAIL_USE_TLS = False
+# 邮件发送者
+EMAIL_FROM = 'mydjangotest@sina.com'
