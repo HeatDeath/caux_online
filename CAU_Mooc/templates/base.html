@@ -39,12 +39,14 @@
                                 </dd>
                             </dl>
                             <div class="btn">
-                                <a class="personcenter fl" href="{% url 'users:user_info' %}">进入个人中心</a>
+{#                                <a class="personcenter fl" href="{% url 'users:user_info' %}">进入个人中心</a>#}
+                                <a class="personcenter fl" href="">进入个人中心</a>
                                 <a class="fr" href="{% url 'logout' %}">退出</a>
                             </div>
                         </div>
                     </div>
-                    <a href="{% url 'users:mymessage' %}">
+{#                    <a href="{% url 'users:mymessage' %}">#}
+                    <a href="">
                         <div class="msg-num">
                             <span id="MsgNum">{{ request.user.unread_nums }}</span>
                         </div>
@@ -84,30 +86,30 @@
             </div>
 
             {# 导航栏 #}
-            <nav>
-                <div class="nav">
-                    <div class="wp">
-                        <ul>
-                            <li {% if request.path == '/index' %}class="active"{% endif %}>
-                                <a href="{% url 'index' %}">首页</a>
-                            </li>
-
-                            <li {% if request.path|slice:'7' == '/course' %}class="active"{% endif %}>
-                                <a href="{% url 'course:course_list' %}">
-                                    公开课<img class="hot" src="{% static 'images/nav_hot.png' %}">
-                                </a>
-                            </li>
-
-                            <li {% if request.path|slice:'12' == '/org/teacher' %}class="active"{% endif %}>
-                                <a href="{% url 'org:teacher_list' %}">授课教师</a>
-                            </li>
-                            <li {% if request.path|slice:'9' == '/org/list' %}class="active"{% endif %}>
-                                <a href="{% url 'org:org_list' %}">授课机构</a>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-            </nav>
+{#            <nav>#}
+{#                <div class="nav">#}
+{#                    <div class="wp">#}
+{#                        <ul>#}
+{#                            <li {% if request.path == '/index' %}class="active"{% endif %}>#}
+{#                                <a href="{% url 'index' %}">首页</a>#}
+{#                            </li>#}
+{##}
+{#                            <li {% if request.path|slice:'7' == '/course' %}class="active"{% endif %}>#}
+{#                                <a href="{% url 'course:course_list' %}">#}
+{#                                    公开课<img class="hot" src="{% static 'images/nav_hot.png' %}">#}
+{#                                </a>#}
+{#                            </li>#}
+{##}
+{#                            <li {% if request.path|slice:'12' == '/org/teacher' %}class="active"{% endif %}>#}
+{#                                <a href="{% url 'org:teacher_list' %}">授课教师</a>#}
+{#                            </li>#}
+{#                            <li {% if request.path|slice:'9' == '/org/list' %}class="active"{% endif %}>#}
+{#                                <a href="{% url 'org:org_list' %}">授课机构</a>#}
+{#                            </li>#}
+{#                        </ul>#}
+{#                    </div>#}
+{#                </div>#}
+{#            </nav>#}
 
         </div>
     </header>

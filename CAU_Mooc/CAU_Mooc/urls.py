@@ -29,5 +29,7 @@ urlpatterns = [
     url(r'^modify_pwd/$', ResetPwdView.as_view(), name='modify_pwd'),
     # 配置 captcha 验证码生成工具的 url
     url(r'^captcha/', include('captcha.urls')),
+    # 配置 college 课程学院的 url
+    url(r'^college/', include('cau_college.urls', namespace='college')),
 
 ]

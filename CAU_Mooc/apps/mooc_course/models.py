@@ -20,7 +20,7 @@ class Course(models.Model):
     learn_times = models.IntegerField(default=0, verbose_name='学习时长(分钟数)')
     student_nums = models.IntegerField(default=0, verbose_name='学习人数')
     fav_nums = models.IntegerField(default=0, verbose_name='收藏人数')
-    image = models.ImageField(upload_to='media/course/%Y/%m', verbose_name='封面图片', max_length=100)
+    image = models.ImageField(upload_to='course/%Y/%m', verbose_name='封面图片', max_length=100)
     click_nums = models.IntegerField(default=0, verbose_name='点击数')
     add_time = models.DateTimeField(default=datetime.now, verbose_name='添加时间')
     tag = models.CharField(default='', verbose_name='课程标签', max_length=10)
@@ -38,9 +38,10 @@ class Course(models.Model):
     # 修改后台列名的显示，否则该列显示为 get_zj_nums
     get_zj_nums.short_description = '章节数'
 
-    # 获取正在学习当前课程的【前五名】用户
-    # def get_learn_users(self):
-    #     return self.usercourse_set.all()[:5]
+    # 获取正在学习当前课程用户数量
+    def get_user_nums(self):
+        return self.usercourse_set.all().count()
+    get_user_nums.short_description = '学生数'
 
     # 获取课程所包含的章节
     def get_course_lesson(self):
@@ -88,7 +89,7 @@ class Video(models.Model):
 class CourseResource(models.Model):
     course = models.ForeignKey(Course, verbose_name='课程')
     name = models.CharField(max_length=100, verbose_name='名称')
-    download = models.FileField(upload_to='media/course/resource/%Y/%m', verbose_name='资源文件', max_length=100)
+    download = models.FileField(upload_to='course/resource/%Y/%m', verbose_name='资源文件', max_length=100)
     add_time = models.DateTimeField(default=datetime.now, verbose_name='添加时间')
 
     class Meta:

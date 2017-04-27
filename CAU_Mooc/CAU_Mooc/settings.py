@@ -48,6 +48,8 @@ INSTALLED_APPS = [
     'crispy_forms',
     # 注册 captcha 随机验证码生成工具
     'captcha',
+    # 注册 pure_pagination 分页工具
+    'pure_pagination',
 ]
 
 # 使用重新设计的 PersonalInformation 表替换 auth 的 User 表
