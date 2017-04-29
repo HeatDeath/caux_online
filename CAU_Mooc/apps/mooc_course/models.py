@@ -43,6 +43,10 @@ class Course(models.Model):
         return self.usercourse_set.all().count()
     get_user_nums.short_description = '学生数'
 
+    # 获取前五名正在学习本课程的用户
+    def get_learn_users(self):
+        return self.usercourse_set.all()[:5]
+
     # 获取课程所包含的章节
     def get_course_lesson(self):
         return self.lesson_set.all()

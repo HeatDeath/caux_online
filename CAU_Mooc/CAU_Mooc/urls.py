@@ -1,11 +1,13 @@
 import xadmin
 from django.conf.urls import url, include
-from django.contrib import admin
 from django.views.generic import TemplateView
+from django.views.static import serve #处理静态文件
 
 
+from CAU_Mooc.settings import MEDIA_ROOT
 from user_member.views import LoginView, IndexView, RegisterView, ActiveUserView, ForgetView, \
                               ResetPwdView, LogoutView
+
 
 
 urlpatterns = [
@@ -29,7 +31,18 @@ urlpatterns = [
     url(r'^modify_pwd/$', ResetPwdView.as_view(), name='modify_pwd'),
     # 配置 captcha 验证码生成工具的 url
     url(r'^captcha/', include('captcha.urls')),
-    # 配置 college 课程学院的 url
+    # 配置 college 学院 App 的 url
     url(r'^college/', include('cau_college.urls', namespace='college')),
+    # 配置 course 课程 App 的 url
+    url(r'^course/', include('mooc_course.urls', namespace='course')),
+    # 配置 user 用户 App的 url
+    url(r'^users/', include('user_member.urls', namespace='users')),
+    # 配置 media 上传文件访问处理 url
+    url(r'^media/(?P<path>.*)$', serve, {'document_root': MEDIA_ROOT}),
 
 ]
+
+
+# 全局 404,500 页面配置
+handler404 = 'site_manage.views.page_not_found'
+handler500 = 'site_manage.views.page_error'
